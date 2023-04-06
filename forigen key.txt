@@ -1,0 +1,67 @@
+create table employe
+(
+eid int not null primary key,
+ename varchar(40),
+address varchar(30)
+);
+desc employe;
+create table department
+(
+did int not null primary key,
+dname varchar(30),
+empid int not null,
+FOREIGN KEY(empid) REFERENCES employe(eid)
+);
+desc employe;
+select * from department;
+insert into department(did,dname,empid)values(1,'lal',101);
+
+***************************************************************************************************
+
+create table employe
+(
+eid int not null primary key,
+ename varchar(40),
+address varchar(30)
+);
+insert into employe(eid,ename,address)values(1,'shyam','mumbai');
+select * from employe;
+desc employe;
+create table department
+(
+did int not null primary key,
+dname varchar(30),
+empid int not null,
+FOREIGN KEY(empid) REFERENCES employe(eid)
+);
+desc employe;
+desc department;
+select * from department;
+insert into department(did,dname,empid)values(1,'lal',1);
+drop table employe;
+drop table department;
+
+CREATE TABLE parent_table (
+   parent_id NUMBER(10) PRIMARY KEY,
+   parent_name VARCHAR2(50)
+);
+
+-- create the child table with foreign key constraint
+CREATE TABLE child_table (
+   child_id NUMBER(10) PRIMARY KEY,
+   child_name VARCHAR2(50),
+   parent_id NUMBER(10),
+   FOREIGN KEY (parent_id) REFERENCES parent_table(parent_id)
+);
+
+-- insert data into the parent table
+INSERT INTO parent_table (parent_id, parent_name) VALUES (1, 'Parent 1');
+
+-- retrieve the primary key value
+SELECT parent_id FROM parent_table WHERE parent_name = 'Parent 1';
+
+-- insert data into the child table
+INSERT INTO child_table (child_id, child_name, parent_id) VALUES (1, 'Child 1', 1);
+
+select * from parent_table;
+select * from child_table;
