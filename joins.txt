@@ -1,0 +1,62 @@
+*****************joins*****************
+
+create table emp(
+empid int primary key,
+name varchar(30),
+city varchar(30)
+);
+desc emp;
+select * from emp;
+insert into emp(empid,name,city)values(1,'lal','up');
+insert into emp(empid,name,city)values(2,'ful','mp');
+insert into emp(empid,name,city)values(3,'gul','hp');
+insert into emp(empid,name,city)values(4,'gon','go');
+alter table emp
+add sal int;
+update emp
+set sal=200
+where empid=1;
+update emp
+set sal=300
+where empid=2;
+update emp
+set sal=300
+where empid=3;
+
+
+create table dep(
+did int not null primary key,
+dname varchar(30),
+city varchar(30),
+eid int,
+FOREIGN KEY (eid) REFERENCES emp(empid)
+);
+desc dep;
+insert into dep(did,dname,city,eid)values(101,'ram','up',1);
+insert into dep(did,dname,city,eid)values(102,'rom','mp',2);
+insert into dep(did,dname,city,eid)values(103,'ravan','hp',3);
+insert into dep(did,dname,city,eid)values(104,'ang','mumbai',4);
+select * from dep;
+drop table dep;
+select emp.name,dep.dname,dep.city from emp
+left join dep
+on emp.empid=dep.eid;
+create table sal(
+id int not null primary key,
+sal int,
+sid not null,
+FOREIGN KEY (SID) REFERENCES emp(empid)
+);
+desc sal;
+insert into sal(id,sal,sid)values(201,200,1);
+insert into sal(id,sal,sid)values(202,300,2);
+insert into sal(id,sal,sid)values(203,400,3);
+insert into sal(id,sal,sid)values(204,500,4);
+select * from sal;
+select emp.name , sal.sal from emp
+left join sal
+on emp.empid = sal.sid;
+
+select emp.sal , sal.sal from emp 
+left join sal 
+on emp.empid = sal.sid;
